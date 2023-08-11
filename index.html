@@ -109,9 +109,10 @@
                 <h2>매매 수수료 계산</h2>
                 <div class="input-group">
                     <label for="exchange">거래소 선택:</label>
-                    <select id="exchange">
+                    <select id="exchange" onchange="updateCurrencySymbol()">
                         <option value="bitget">비트겟</option>
                         <option value="bybit">바이비트</option>
+                        <option value="upbit">업비트</option>
                     </select>
                 </div>
                 <div class="input-group">
