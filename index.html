@@ -129,10 +129,11 @@
                     </select>
                 </div>
                 <div class="input-group">
-                    <label for="investment-amount">투입금액:</label>
-                    <input type="number" id="investment-amount" placeholder="금액 입력">
+                   <label for="investment-amount">투입금액:</label>
+                    <div class=" currency-money"><input type="number" id="investment-amount" placeholder="금액 입력"><span
+                            id="currency-symbol"></span></div>
                 </div>
-                <div class="input-group">
+                <div class="input-group " id="leverage-group">
                     <label for="leverage">레버리지:</label>
                     <input type="number" id="leverage" placeholder="레버리지 입력">
                 </div>
@@ -179,21 +180,32 @@
             const orderType = document.getElementById('order-type').value;
             const amount = parseFloat(document.getElementById('investment-amount').value);
             const leverage = parseFloat(document.getElementById('leverage').value);
-
+            let currencySymbol;
             let feeRate;
             if (exchange === 'bitget' && feeType === 'applied' && orderType === 'market') {
                 feeRate = 0.0004;
+                currencySymbol = '$';
             } else if (exchange === 'bitget' && feeType === 'not-applied' && orderType === 'market') {
                 feeRate = 0.0006;
+                currencySymbol = '$';
             } else if (exchange === 'bitget' && orderType === 'limit') {
                 feeRate = 0.0002;
+                currencySymbol = '$';
             } else if (exchange === 'bybit' && feeType === 'applied' && orderType === 'market') {
                 feeRate = 0.00044;
+                currencySymbol = '$';
             } else if (exchange === 'bybit' && feeType === 'not-applied' && orderType === 'market') {
                 feeRate = 0.00055;
+                currencySymbol = '$';
             } else if (exchange === 'bybit' && orderType === 'limit') {
                 feeRate = 0.0002;
-            } else {
+                currencySymbol = '$';
+            }
+            else if (exchange === 'upbit') {
+                feeRate = 0.05;
+                currencySymbol = '₩';
+            }
+            else {
                 alert('계산할 수수료 정보를 선택해주세요.');
                 return;
             }
@@ -202,12 +214,30 @@
             const roundedResult = result.toFixed(3);
             const formattedResult = numberWithCommas(roundedResult);
 
-            document.getElementById('fee-result').innerText = `수수료 결과: ${formattedResult.endsWith('.000') ? formattedResult.split('.')[0] : formattedResult} $`;
+            document.getElementById('fee-result').innerText = `수수료 결과: ${formattedResult.endsWith('.000') ? formattedResult.split('.')[0] : formattedResult} ${currencySymbol}`;
         }
 
         function numberWithCommas(x) {
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
         }
+
+        function updateCurrencySymbol() {
+            const exchange = document.getElementById('exchange').value;
+            let currencySymbol;
+
+            if (exchange === 'upbit') {
+                currencySymbol = '₩';
+                document.getElementById('fee-type-group').style.display = 'none';
+                document.getElementById('leverage-group').style.display = 'none';
+            } else {
+                currencySymbol = '$';
+                document.getElementById('fee-type-group').style.display = 'block';
+                document.getElementById('leverage-group').style.display = 'block';
+            }
+
+            document.getElementById('currency-symbol').textContent = currencySymbol;
+        }
+        updateCurrencySymbol();
     </script>
 </body>
 </html>
