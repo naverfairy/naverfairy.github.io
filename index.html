@@ -190,22 +190,22 @@ align-items: center;
             let currencySymbol;
             let feeRate;
             if (exchange === 'bitget' && feeType === 'applied' && orderType === 'market') {
-                feeRate = 0.0004;
+                feeRate = 0.04;
                 currencySymbol = '$';
             } else if (exchange === 'bitget' && feeType === 'not-applied' && orderType === 'market') {
-                feeRate = 0.0006;
+                feeRate = 0.06;
                 currencySymbol = '$';
             } else if (exchange === 'bitget' && orderType === 'limit') {
-                feeRate = 0.0002;
+                feeRate = 0.02;
                 currencySymbol = '$';
             } else if (exchange === 'bybit' && feeType === 'applied' && orderType === 'market') {
-                feeRate = 0.00044;
+                feeRate = 0.044;
                 currencySymbol = '$';
             } else if (exchange === 'bybit' && feeType === 'not-applied' && orderType === 'market') {
-                feeRate = 0.00055;
+                feeRate = 0.055;
                 currencySymbol = '$';
             } else if (exchange === 'bybit' && orderType === 'limit') {
-                feeRate = 0.0002;
+                feeRate = 0.01;
                 currencySymbol = '$';
             }
             else if (exchange === 'upbit') {
