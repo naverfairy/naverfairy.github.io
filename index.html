@@ -217,8 +217,8 @@ align-items: center;
                 return;
             }
 
-            const result = (amount / 100) * leverage * feeRate;
-            const roundedResult = result.toFixed(2);
+            const result = amount * leverage * feeRate;
+            const roundedResult = result.toFixed(3);
             const formattedResult = numberWithCommas(roundedResult);
 
             document.getElementById('fee-result').innerText = `수수료 결과: ${formattedResult.endsWith('.000') ? formattedResult.split('.')[0] : formattedResult} ${currencySymbol}`;
